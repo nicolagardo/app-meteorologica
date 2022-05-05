@@ -14,9 +14,12 @@ const apiKey = "627c57232dbfcef21a812fd90aaa2b3f";
 form.addEventListener("submit", e => {
   e.preventDefault()
   //console.log("test");
-
+  const listItems = list.querySelectorAll(".ajax-section .city");
   const inputVal = input.value;
   //console.log(inputVal)
+  
+  //ajax
+  
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${apiKey}&units=metric`;
 
 
