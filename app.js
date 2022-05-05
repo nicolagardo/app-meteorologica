@@ -49,7 +49,7 @@ li.innerHTML = markup;
 list.appendChild(li);
   })
   .catch(() => {
-    msg.textContent = "Please search for a valid city 😩";
+    msg.textContent = "Por favor, busca una ciudad valida 😩";
   });
   msg.textContent = "";
   form.reset();
