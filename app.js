@@ -26,11 +26,30 @@ form.addEventListener("submit", e => {
   fetch(url)
   .then(response => response.json())
   .then(data => {
-    const { main, name, sys, weather } = data;
-const icon = `https://openweathermap.org/img/wn/${
-  weather[0]["icon"]
-}@2x.png`;
- 
+    const { main, name, sys, weather, timezone } = data;
+// const icon = `https://openweathermap.org/img/wn/${
+//   weather[0]["icon"]
+// }@2x.png`;
+    const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${
+        weather[0]["icon"]
+    }.svg`;
+    console.log(timezone/3600);
+    const tzEnHoras = timezone/3600
+    console.log("gmt local: ",tzEnHoras);
+    const d = new Date((new Date()));
+    
+    d.toISOString()
+    const hora = d.getHours();
+    const horaDelaConsulta = d.getTimezoneOffset()/60
+    console.log("Hora de consulta: ", horaDelaConsulta);
+    console.log("hora local: ", hora);
+    const horaLocal = (hora + (tzEnHoras) + horaDelaConsulta)
+   const hl = horaLocal >= 24 ? horaLocal - 24 : horaLocal;
+    console.log("hora local seteada: ",horaLocal);
+    console.log("hora local seteada: ",hl);
+    console.log(d);
+    
+    
 const li = document.createElement("li");
 li.classList.add("city");
 const markup = `
@@ -38,6 +57,8 @@ const markup = `
     <span>${name}</span>
     <sup>${sys.country}</sup>
   </h2>
+  <p>${main.humidity}% Humedad</p>
+  <p>${hl} hs</p>
   <div class="city-temp">${Math.round(main.temp)}<sup>°C</sup>
   </div>
   <figure>
